@@ -16,10 +16,28 @@ export default function TextForm(props) {
         setText(newText)
     }
 
+    const handleClear =()=> {
+        let newText = '';
+        setText(newText);
+    }
+
+    const handleCapitalize =()=> {
+        // let newText = text;
+        const newText = text.split(" ");
+        for (let i = 0; i < newText.length; i++) {
+            newText[i] = newText[i][0].toUpperCase() + newText[i].split(1);
+            setText(newText);
+        }
+        
+    }
+
     const handleOnChange =(event)=> {
         console.log("On Change");
         setText(event.target.value);
     }
+
+  
+
 
     const [text, setText] = useState("");
 
@@ -35,6 +53,11 @@ export default function TextForm(props) {
 
             <button className="btn btn-primary  mx-2" onClick={handleUpClick}>Convert to UpperCase</button>
             <button className="btn btn-primary  mx-2 " onClick={handleLoClick}>Convert to LowerCase</button>
+            <button className="btn btn-primary  mx-2 " onClick={handleClear}>Clear Text</button>
+
+            <button className="btn btn-primary  mx-2 " onClick={handleCapitalize}>Capitalize text</button>
+            {/* <button className="btn btn-primary  mx-2 " onClick={handleClear}>Clear Text</button> */}
+
 
         </div>
 
