@@ -8,17 +8,22 @@ export default function TextForm(props) {
         console.log("Uppercase was clicked!" + text);
         let newText = text.toUpperCase();
         setText(newText)
+        props.showalert("Converted to Uppercase", "success")
     }
 
     const handleLoClick = () => {
         console.log("LowerCase was clicked!" + text);
         let newText = text.toLowerCase();
         setText(newText)
+        props.showalert("Converted to Lppercase", "success")
+
     }
 
     const handleClear =()=> {
         let newText = '';
         setText(newText);
+        props.showalert("Cleared content", "success")
+
     }
 
     const handleCapitalize =()=> {
@@ -27,6 +32,8 @@ export default function TextForm(props) {
         for (let i = 0; i < newText.length; i++) {
             newText[i] = newText[i][0].toUpperCase() + newText[i].split(1);
             setText(newText);
+            props.showalert("Capitalized content data", "success")
+
         }
         
     }
@@ -36,11 +43,15 @@ export default function TextForm(props) {
         let text = document.getElementById("myBox");
         text.select();
         navigator.clipboard.writeText(text.value)
+        props.showalert("Copied text item", "success")
+
     }
 
     const handleExtraSpaces = ()=> {
         let newText = text.split(/[ ]+/);
         setText(newText.join(" "))
+        props.showalert("Removed extra space", "success")
+
     }
 
     const handleOnChange =(event)=> {
@@ -60,7 +71,7 @@ export default function TextForm(props) {
         
             <h1>{props.heading}</h1>
             <div className="mb-3">
-            <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="4"></textarea>
+            <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode === 'dark'?'grey':'white' }} id="myBox" rows="4"></textarea>
             </div>
 
             <button className="btn btn-primary  mx-2" onClick={handleUpClick}>Convert to UpperCase</button>
@@ -79,7 +90,7 @@ export default function TextForm(props) {
         <p>{text.split(" ").length} <b>words</b>, {text.length} <b>characters</b></p>
         <p>{ 0.008 * text.split(" ").length} Minutes to read</p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>{text.length > 0? text:"Enter Something in the textbox above to preview it here"}</p>
 
         </div>
     </>
